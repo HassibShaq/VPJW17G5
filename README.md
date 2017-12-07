@@ -36,7 +36,8 @@ Tools -> Options -> Build & Run -> Kits
 -- Compiler auswählen
 
 6. Projekt öffnen
-7. OpenCV / MySql Include- und Lib-Pfad eintragen (Pfad anpassen)
+7. Projects -> Build Settings -> Shadow Build (für alle Configurations) deaktivieren
+8. OpenCV / MySql Include- und Lib-Pfad eintragen (Pfad anpassen)
 ```
 INCLUDEPATH += \
     "D:/opencv/build/include" \
@@ -46,4 +47,4 @@ LIBS += \
     -lopencv_world331
 ```
 
-8. DLLs von OpenCV / MySql zum System PATH hinzufügen oder in das Projektverzeicnis kopieren
+9. DLLs von OpenCV / MySql zum System PATH hinzufügen oder in das Projektverzeicnis kopieren
