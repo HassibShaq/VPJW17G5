@@ -47,4 +47,4 @@ LIBS += \
     -lopencv_world331
 ```
 
-9. DLLs von OpenCV / MySql zum System PATH hinzufügen oder in das Projektverzeicnis kopieren
+9. DLLs von OpenCV / MySql zum System PATH hinzufügen oder in das Projektverzeicnis (Release) kopieren
