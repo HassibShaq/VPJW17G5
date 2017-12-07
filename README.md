@@ -16,11 +16,34 @@ https://opencv.org/releases.html
 MySql Connector/C (libmysqlclient) 6.1.11 (64 Bit? Installer oder Zip)<br>
 https://dev.mysql.com/downloads/connector/c/
 
+GitHub Desktop Client
+https://desktop.github.com/
+
 ## Installation / Einrichtung
 1. Visual Studio 2015 Enterprise 
 > Benutzerdefinierte Installation<br>
 > Programming Languages -> C++
 2. QT
+> mscv2015 64-bit<br>
+> Qt Creator 4.5.0
 3. OpenCV
 4. MySql Connector
 
+5. Qt Creator Starten
+Tools -> Options -> Build & Run -> Kits
+-- Bestehendes Anpassen oder
+-- Neues Hinzfügen
+-- Compiler auswählen
+
+6. Projekt öffnen
+7. OpenCV / MySql Include- und Lib-Pfad eintragen (Pfad anpassen)
+```
+INCLUDEPATH += \
+    "D:/opencv/build/include" \
+
+LIBS += \
+    "-LD:/opencv/build/x64/vc14/lib" \
+    -lopencv_world331
+```
+
+8. DLLs von OpenCV / MySql zum System PATH hinzufügen oder in das Projektverzeicnis kopieren
