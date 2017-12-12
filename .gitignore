@@ -1,0 +1,7 @@
+
+*.png
+ArucoMarkerGenerierung/ArucoMarkerGenerierung.pro.user
+ArucoMarkerGenerierung/Makefile
+ArucoMarkerGenerierung/Makefile.Debug
+ArucoMarkerGenerierung/release/ArucoMarkerGenerierung.exe
+ArucoMarkerGenerierung/Makefile.Release
