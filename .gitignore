@@ -3,3 +3,8 @@ ArucoMarkerGenerierung/Makefile.Release
 ArucoMarkerGenerierung/Makefile
 ArucoMarkerGenerierung/Makefile.Debug
 ArucoMarkerGenerierung/ArucoMarkerGenerierung.pro.user
+*.Release
+*.Debug
+ArucoMarkerErkennung/Makefile
+*.user
+*.stash
