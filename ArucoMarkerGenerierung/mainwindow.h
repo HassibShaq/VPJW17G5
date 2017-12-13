@@ -4,8 +4,10 @@
 #include <QMainWindow>
 #include <opencv2/opencv.hpp>
 #include <opencv2/aruco.hpp>
+#include <arucoserializer.h>
 #include <QDebug>
 #include <QFileDialog>
+#include <QDateTime>
 
 namespace Ui {
 class MainWindow;
@@ -27,10 +29,17 @@ private slots:
 
     void on_pushButtonSave_clicked();
 
-    void on_pushButtonGenerate_2_clicked();
+    void on_pushButtonLoadBase_clicked();
+
+    void on_pushButtonSaveImages_clicked();
+
+    void on_pushButtonGeneratePreview_clicked();
+
+    void on_pushButtonClearBase_clicked();
 
 private:
     Ui::MainWindow *ui;
+    cv::Ptr<cv::aruco::Dictionary> BaseDict;
     cv::Ptr<cv::aruco::Dictionary> GeneratedDict;
     int MarkerCount;
     int MarkerSizeBit;

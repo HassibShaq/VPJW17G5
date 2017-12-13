@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     Qt::WindowFlags flags = Qt::WindowCloseButtonHint;
     this->setWindowFlags(flags);
     connect(ui->pushButtonGenerate, SIGNAL(clicked()), this, SLOT(react()));
+    BaseDict = cv::makePtr<cv::aruco::Dictionary>();
 }
 
 MainWindow::~MainWindow()
@@ -23,54 +24,57 @@ void MainWindow::react()
         this->MarkerSizeBit = ui->lineEditMSizeBit->text().toInt();
         this->MarkerSizePixel = ui->lineEditMSizePix->text().toInt();
     }catch(...) {
-        ui->statusBar->showMessage("Wrong Input Format", 1000);
+        ui->statusBar->showMessage("Wrong Input Format", 3000);
         return;
     }
 
     cv::Mat Marker;
 
-    this->GeneratedDict = cv::aruco::generateCustomDictionary(this->MarkerCount, this->MarkerSizeBit);
-    ui->statusBar->showMessage("Dictionary generated.", 1000);
-}
-
-void MainWindow::saveArucoDictionary(cv::aruco::Dictionary Dictionary, QString Path)
-{
-    cv::FileStorage Storage(Path.toUtf8().constData(), cv::FileStorage::WRITE);
-    Storage << "MarkerSize" << Dictionary.markerSize;
-    Storage << "MaxCorrectionBits" << Dictionary.maxCorrectionBits;
-    Storage << "ByteList" << Dictionary.bytesList;
-    Storage.release();
-
-    cv::Mat Marker;
-
-    for (int i = 0; i<this->MarkerCount; i++)
-    {
-        cv::aruco::drawMarker(this->GeneratedDict, i, this->MarkerSizePixel, Marker);
-        cv::imwrite(QString("Marker%1.png").arg(i).toUtf8().constData(), Marker);
-    }
-    ui->statusBar->showMessage("Dictionary saved.", 1000);
-}
-
-cv::Ptr<cv::aruco::Dictionary> MainWindow::loadArucoDictionary(QString Path)
-{
-    cv::aruco::Dictionary Dictionary;
-    cv::FileStorage Storage(Path.toUtf8().constData(), cv::FileStorage::READ);
-    int MSize, MCBits;
-    cv::Mat BytesList;
-    Storage["MarkerSize"] >> MSize;
-    Storage["MaxCorrectionBits"] >> MCBits;
-    Storage["ByteList"] >> BytesList;
-    Storage.release();
-    Dictionary = cv::aruco::Dictionary(BytesList, MSize, MCBits);
-    return cv::makePtr<cv::aruco::Dictionary>(Dictionary);
+    this->GeneratedDict = cv::aruco::generateCustomDictionary(this->MarkerCount, this->MarkerSizeBit, BaseDict);
+    ui->statusBar->showMessage("Dictionary generated.", 3000);
 }
 
 void MainWindow::on_pushButtonSave_clicked()
 {
-    this->saveArucoDictionary(this->GeneratedDict, "test.yml");
+    QString fileName = QFileDialog::getSaveFileName(this, "Save File",
+                                                    QDir::currentPath(),
+                                                    "Aruco Dictonary (*.yml)");
+    if (!fileName.isEmpty()) {
+        ArucoSerializer::saveArucoDictionary(this->GeneratedDict, fileName);
+        ui->statusBar->showMessage("Dictionary saved.", 3000);
+    }
 }
 
-void MainWindow::on_pushButtonGenerate_2_clicked()
+void MainWindow::on_pushButtonLoadBase_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, "Open File",
+                                                    QDir::currentPath(),
+                                                    "Aruco Dictonary (*.yml)");
+    if (!fileName.isEmpty()) {
+        BaseDict = ArucoSerializer::loadArucoDictionary(fileName);
+        GeneratedDict = BaseDict;
+        MarkerSizeBit = GeneratedDict.get()->markerSize;
+        ui->lineEditMSizeBit->setText(QString::number(MarkerSizeBit));
+        ui->lineEditMSizeBit->setEnabled(false);
+        ui->pushButtonLoadBase->setEnabled(false);
+        ui->pushButtonClearBase->setEnabled(true);
+        ui->statusBar->showMessage("Dictionary loaded.", 3000);
+    }
+
+}
+
+void MainWindow::on_pushButtonSaveImages_clicked()
+{
+    QString fileName = QFileDialog::getExistingDirectory(this, "Open Directory",
+                                                    QDir::currentPath(),
+                                                    QFileDialog::ShowDirsOnly
+                                                    | QFileDialog::DontResolveSymlinks);
+    if (!fileName.isEmpty()) {
+        ArucoSerializer::drawArucoDictionary(GeneratedDict, fileName, QString::number(QDateTime::currentMSecsSinceEpoch()), MarkerSizePixel);
+    }
+}
+
+void MainWindow::on_pushButtonGeneratePreview_clicked()
 {
     cv::Mat Marker;
     for (int i = 0; i<this->MarkerCount; i++)
@@ -78,4 +82,14 @@ void MainWindow::on_pushButtonGenerate_2_clicked()
         cv::aruco::drawMarker(this->GeneratedDict, i, this->MarkerSizePixel, Marker);
         cv::imshow(QString("Marker %1").arg(i).toUtf8().constData(), Marker);
     }
+}
+
+void MainWindow::on_pushButtonClearBase_clicked()
+{
+    BaseDict = cv::makePtr<cv::aruco::Dictionary>();
+    ui->lineEditMSizeBit->setText("");
+    ui->lineEditMSizeBit->setEnabled(true);
+    ui->pushButtonLoadBase->setEnabled(true);
+    ui->pushButtonClearBase->setEnabled(false);
+    ui->statusBar->showMessage("Dictionary cleared.", 3000);
 }
