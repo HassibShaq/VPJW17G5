@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CameraCalibrationData>
+<Camera id="0" name="TopLeft" pos="tl">
+<Matrix fx="1921.34" fy="1921.34" cx="337.881" cy="196.891"/>
+<LensDistortion p1="-3.8948614572e-03" p2="-8.1788117475e-03" k1="-3.4127742557e+00" k2="1.5338954367e+01" k3="-3.0913032842e+01"/>
+<TransformationMatrix t1="1" t2="2.1533e-15" t3="-4.46961e-13" t4="8.05198e-17" t5="1" t6="-4.78064e-14" t7="4.53156e-19" t8="5.1489e-18" t9="1"/>
+<Settings brg="128" cnt="64" exp="-7"/>
+</Camera>
+<Camera id="1" name="BottomCenter" pos="bc">
+<Matrix fx="505.675" fy="505.675" cx="330.188" cy="222.668"/>
+<LensDistortion p1="5.4465689753e-04" p2="1.8686258427e-04" k1="-2.0448412765e-01" k2="7.2300324973e-02" k3="-1.4198938493e-02"/>
+<TransformationMatrix t1="1" t2="2.66454e-15" t3="640" t4="1.33227e-15" t5="1" t6="480" t7="6.07153e-18" t8="3.25261e-18" t9="1"/>
+<Settings brg="128" cnt="64" exp="-7"/>
+</Camera>
+<Camera id="2" name="TopCenter" pos="tc">
+<Matrix fx="1096.83" fy="1096.83" cx="371.978" cy="249.715"/>
+<LensDistortion p1="-7.6424647486e-04" p2="-3.6394352209e-03" k1="-1.0906015567e+00" k2="1.3103982984e+00" k3="-3.6017147236e-01"/>
+<TransformationMatrix t1="1" t2="2.44249e-15" t3="640" t4="2.77556e-16" t5="1" t6="-6.25278e-13" t7="-1.0842e-18" t8="1.51788e-18" t9="1"/>
+<Settings brg="128" cnt="63" exp="-5"/>
+</Camera>
+<Camera id="3" name="BottomRight" pos="br"><Matrix fx="334.406" fy="334.406" cx="289.981" cy="235.642"/>
+<LensDistortion p1="7.1073029215e-04" p2="-4.8341721691e-04" k1="-9.2444773565e-02" k2="1.1172946045e-02" k3="5.3682490080e-05"/>
+<TransformationMatrix t1="1" t2="-7.99361e-15" t3="1280" t4="3.9968e-15" t5="1" t6="480" t7="3.90313e-18" t8="-4.33681e-18" t9="1"/>
+<Settings brg="128" cnt="64" exp="-7"/>
+</Camera>
+<Camera id="4" name="TopRight" pos="tr">
+<Matrix fx="844.131" fy="844.131" cx="330.676" cy="198.213"/>
+<LensDistortion p1="1.3070599304e-03" p2="-2.9514587200e-04" k1="-6.4969451228e-01" k2="4.6790228327e-01" k3="-6.5865496282e-02"/>
+<TransformationMatrix t1="1" t2="0" t3="1280" t4="-1.11022e-16" t5="1" t6="0" t7="1.30104e-18" t8="2.1684e-19" t9="1"/>
+<Settings brg="128" cnt="64" exp="-7"/>
+</Camera>
+<Camera id="5" name="BottomLeft" pos="bl">
+<Matrix fx="687.939" fy="687.939" cx="345.474" cy="211.103"/>
+<LensDistortion p1="2.3915422729e-03" p2="1.7741984836e-03" k1="-4.4638383174e-01" k2="2.5125994302e-01" k3="-7.5045784217e-02"/>
+<TransformationMatrix t1="1" t2="-5.55112e-16" t3="-1.98952e-13" t4="7.77156e-16" t5="1" t6="480" t7="2.81893e-18" t8="4.33681e-19" t9="1"/>
+<Settings brg="128" cnt="64" exp="-7"/>
+</Camera>
+</CameraCalibrationData>

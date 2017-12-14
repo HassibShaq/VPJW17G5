@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/images">
-        <file>Hawhamburg-logo.png</file>
-        <file>HAW_Hamburg.png</file>
-    </qresource>
-</RCC>
