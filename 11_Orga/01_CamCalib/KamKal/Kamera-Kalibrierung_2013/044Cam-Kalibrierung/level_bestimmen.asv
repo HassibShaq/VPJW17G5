@@ -1,0 +1,8 @@
+if exist('vid','var')   %Prüfen ob die Variable 'vid' existiert
+    stop(vid);
+    delete(vid);
+end
+
+clear all;
+clc;
+vio_number=2; %Nummer des Video Input Objekt

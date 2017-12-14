@@ -1,0 +1,9 @@
+function [ x0,y0 ] = find_midpoint( a,anzahl_reflektoren )
+r=100;
+for i=1 : anzahl_reflektoren
+    r=sqrt( (a(i,1)-320)^2 + (a(i,2)-240)^2 );
+    if r
+end
+
+end
+

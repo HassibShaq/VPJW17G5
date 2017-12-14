@@ -1,0 +1,38 @@
+function [bin_frame] = transform_frame(frame)
+%r=25/4.6875;
+%R=30/4.6875;
+
+% historgram=imhist(frame, 265);  %Häufigkeitsverteilung von Messwerten
+% level = graythresh(frame);
+level=0.38;
+bin_frame1=im2bw(frame,level);    %Bild in ein binäres Bild wandeln level 35
+% figure(1);
+% imshow(bin_frame);
+bin_frame2=im2bw(frame,0.31);    %Bild in ein binäres Bild wandeln level 28
+% figure(3);
+% imshow(bin_frame2);
+bin_frame3=im2bw(frame,0.24);    %Bild in ein binäres Bild wandeln level 19
+% figure(3);
+% imshow(bin_frame2);
+bin_frame=bin_frame2;
+bin_frame(161:320,213:427)=bin_frame1(161:320,213:427); %Kasten in der Mitte Erstellen
+
+bin_frame(361:480,1:160)=bin_frame3(361:480,1:160);    %Ecke unten links
+bin_frame(1:120,1:160)=bin_frame3(1:120,1:160);    %Ecke oben links
+bin_frame(361:480,481:640)=bin_frame3(361:480,481:640);    %Ecke unten rechts
+bin_frame(1:120,481:640)=bin_frame3(1:120,481:640);    %Ecke unten oben rechts
+
+bin_frame(1:480,1:80)=bin_frame3(1:480,1:80);    %Ecke oben links (1:180,1:80)
+bin_frame(1:60,1:640)=bin_frame3(1:60,1:640);    %Ecke oben links (1:60,1:240)
+
+% bin_frame(301:480,1:80)=bin_frame3(301:480,1:80);    %Ecke unten links
+bin_frame(421:480,1:640)=bin_frame3(421:480,1:640);    %Ecke unten links (421:480,1:240)
+
+% bin_frame(1:60,401:640)=bin_frame3(1:60,401:640);    %Ecke oben rechts
+bin_frame(1:480,561:640)=bin_frame3(1:480,561:640);    %Ecke oben rechts (1:180,561:640)
+
+% bin_frame(421:480,401:640)=bin_frame3(421:480,401:640);    %Ecke unten rechts
+% bin_frame(301:480,561:640)=bin_frame3(301:480,561:640);    %Ecke unten rechts
+
+subplot(1,2,1)
+imshow(bin_frame);

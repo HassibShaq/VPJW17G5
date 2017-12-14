@@ -1,0 +1,21 @@
+clc;
+
+ztime=0.1-yout(:,57);
+figure(3);
+plot(tout,ztime);
+average=sum(ztime)/length(ztime);
+p_average(1:length(ztime))=average;
+hold on
+plot(tout,p_average,'r-');
+hold off
+xlabel('Zeit t in sec');
+ylabel('Zykluszeit in sec');
+title('Zykluszeitmessung');
+legend('Zykluszeit','Durschnittszykluszeit');
+
+sztime=zeros(length(stime),3);
+for i=1 : length(stime)
+    time1=yout(i,25:27);
+    time2=yout(i+1,25:27);
+    stime(i)=;
+end

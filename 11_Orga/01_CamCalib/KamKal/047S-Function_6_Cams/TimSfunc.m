@@ -1,0 +1,95 @@
+function [sys,x0,str,ts] = TimSfunc(t,x,u,flag)
+
+% Timer S-function
+
+switch flag,
+ 
+  %%%%%%%%%%%%%%%%%%
+  % Initialization %
+  %%%%%%%%%%%%%%%%%%
+  case 0,                                                
+    [sys,x0,str,ts] = mdlInitializeSizes;    
+    
+  %%%%%%%%%%  
+  % Update %
+  %%%%%%%%%%
+case 2,                                               
+    sys = mdlUpdate(t,x,u);
+    
+  %%%%%%%%%%
+  % Output %
+  %%%%%%%%%%
+  case 3,                                               
+    sys = mdlOutputs(t,x,u);    
+
+  %%%%%%%%%%%%%
+  % Terminate %
+  %%%%%%%%%%%%%
+  case 9,                                               
+    sys = [];
+
+  otherwise
+    error(['unhandled flag = ',num2str(flag)]);
+end
+
+%end sfundsc2
+
+%
+%=============================================================================
+% mdlInitializeSizes
+% Return the sizes, initial conditions, and sample times for the S-function.
+%=============================================================================
+%
+function [sys,x0,str,ts]=mdlInitializeSizes()
+
+sizes = simsizes;
+
+sizes.NumContStates  = 0;
+sizes.NumDiscStates  = 0;
+sizes.NumOutputs     = 1;
+sizes.NumInputs      = 0;
+sizes.DirFeedthrough = 0;
+sizes.NumSampleTimes = 1;
+
+sys = simsizes(sizes);
+x0 = [];
+str = [];
+ts  = [0.1 0]; % Sample period of pramameter 0.1
+
+% end mdlInitializeSizes
+
+%
+%=======================================================================
+% mdlUpdate
+% Handle discrete state updates, sample time hits, and major time step
+% requirements.
+%=======================================================================
+%
+function sys = mdlUpdate(t,x,u)
+
+sys = [];
+
+%end mdlUpdate
+
+
+%
+%=======================================================================
+% mdlOutputs
+% Return the output vector for the S-function
+%=======================================================================
+%
+function sys = mdlOutputs(t,x,u)
+
+global start
+
+if t==0
+   start = clock;
+   tpause = 0;
+else
+    tpause  = t-etime(clock, start);  
+    if tpause>0,  pause(tpause); end;
+end;
+
+sys = tpause;
+
+%end mdlOutputs
