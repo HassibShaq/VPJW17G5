@@ -1,0 +1,23 @@
+clear all;
+clc;
+
+input=[1 3 5 7 9];
+output=zeros(1,10);
+size_in=size(input);
+if size_in(1,2)<10
+    output(1:size_in(1,2))=input;
+    for i=size_in(1,2)+1 : 10
+  
+        for j=j : 10
+            if ~max(input==j)
+                output(i)=j;
+                break;
+            end
+        end
+    end
+
+elseif size_in(1,2)>10
+    output=input(1:10);
+else
+    output=input;
+end

@@ -1,0 +1,36 @@
+CC     = "g:\matlab\r2009a\sys\lcc\bin\lcc.exe"
+LD     = "g:\matlab\r2009a\sys\lcc\bin\lcclnk.exe"
+LIBCMD = "g:\matlab\r2009a\sys\lcc\bin\lcclib.exe"
+CFLAGS = -c -Zp8 -DMATLAB_MEX_FILE -noregistrylookup
+LDFLAGS = -s -dll -L"g:\matlab\r2009a\sys\lcc\lib"
+LIBFLAGS = 
+
+OBJECTS = \
+	"Camera_sfun.obj"\
+	"Camera_sfun_registry.obj"\
+	"c2_Camera.obj"\
+	"lccstub.obj"\
+	"g:\matlab\r2009a\sys\lcc\mex\lccdef.def"\
+	"g:\matlab\r2009a\stateflow\c\debugger\lib\win32\sfc_debuglcc.lib"\
+	"g:\matlab\r2009a\stateflow\c\mex\lib\win32\sfc_mexlcc.lib"\
+	"g:\matlab\r2009a\extern\lib\win32\lcc\libmex.lib"\
+	"g:\matlab\r2009a\extern\lib\win32\lcc\libmx.lib"\
+	"g:\matlab\r2009a\extern\lib\win32\lcc\libfixedpoint.lib"\
+	"g:\matlab\r2009a\extern\lib\win32\lcc\libut.lib"\
+	"g:\matlab\r2009a\extern\lib\win32\lcc\libmwmathutil.lib"\
+	"g:\matlab\r2009a\extern\lib\win32\lcc\libemlrt.lib"\
+	"g:\matlab\r2009a\extern\lib\win32\lcc\libmwblascompat32.lib"\
+
+INCLUDE_PATH= -I"g:\matlab\r2009a\sys\lcc\include"  -I"g:\matlab\r2009a\extern\include"  -I"g:\matlab\r2009a\simulink\include"  -I"g:\matlab\r2009a\stateflow\c\mex\include"  -I"g:\matlab\r2009a\stateflow\c\debugger\include" 
+ 
+
+Camera_sfun.mexw32 : $(MAKEFILE) $(OBJECTS)
+	$(LD) $(LDFLAGS) -o Camera_sfun.mexw32 @Camera_sfun.lmko
+Camera_sfun.obj :	"Camera_sfun.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "Camera_sfun.c"
+Camera_sfun_registry.obj :	"Camera_sfun_registry.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "Camera_sfun_registry.c"
+c2_Camera.obj :	"c2_Camera.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "c2_Camera.c"
+lccstub.obj :	"g:\matlab\r2009a\sys\lcc\mex\lccstub.c"
+	$(CC) $(CFLAGS) $(INCLUDE_PATH) "g:\matlab\r2009a\sys\lcc\mex\lccstub.c"
