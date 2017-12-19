@@ -7,7 +7,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ArucoDict = loadArucoDictionary("test.yml");
-    //ImageDog = cv::imread("dog.png");
+    ImageDog = cv::imread("neal.jpg");
+    cv::cvtColor(ImageDog,ImageDog, cv::COLOR_BGR2RGB);
+    cv::resize(ImageDog, ImageDog, cv::Size(50, 50));
     CameraTimer.start(33); // 33 ms = 30 fps
     connect(&CameraTimer, SIGNAL(timeout()), this, SLOT(on_pushButtonSnap_clicked()));
 }
@@ -30,6 +32,11 @@ void MainWindow::on_pushButtonSnap_clicked()
         //3. Bild resizen und altes imageForGui mit neuem ersetzen
         //Resizes an image in order to adapt to the GUI size
         cv::aruco::drawDetectedMarkers(imageForGui, corners, ids);
+
+        for(int i = 0; i < corners.size(); i++)
+        {
+            ImageDog.copyTo(imageForGui(cv::Rect(corners[i][0].x,corners[i][0].y,ImageDog.cols, ImageDog.rows)));
+        }
 
         cv::resize(imageForGui, imageForGui, cv::Size(ui->labelImage->width(), ui->labelImage->height()));
         //QImage
